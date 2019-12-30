@@ -11,11 +11,22 @@ use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\UrlInterface;
 
 use SuttonSilver\PriceLists\Model\ResourceModel\PriceList\CollectionFactory;
+use SuttonSilver\PriceLists\Model\ResourceModel\PriceList\Collection;
 
+/**
+ * Class DataProvider
+ * @package SuttonSilver\PriceLists\Model\PriceList
+ */
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
+    /**
+     * @var Collection
+     */
     protected $collection;
 
+    /**
+     * @var DataPersistorInterface
+     */
     protected $dataPersistor;
 
     protected $loadedData;

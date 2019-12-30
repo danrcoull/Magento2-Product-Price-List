@@ -7,45 +7,76 @@
 
 namespace SuttonSilver\PriceLists\Model;
 
-use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
-use Magento\Framework\Exception\CouldNotSaveException;
-use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\Api\DataObjectHelper;
-use SuttonSilver\PriceLists\Api\Data\PriceListCustomersInterfaceFactory;
-use SuttonSilver\PriceLists\Api\Data\PriceListCustomersSearchResultsInterfaceFactory;
+use Magento\Framework\Api\ExtensibleDataObjectConverter;
+use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
-use Magento\Framework\Reflection\DataObjectProcessor;
-use Magento\Framework\Api\ExtensibleDataObjectConverter;
-use SuttonSilver\PriceLists\Model\ResourceModel\PriceListCustomers\CollectionFactory as PriceListCustomersCollectionFactory;
-use SuttonSilver\PriceLists\Model\ResourceModel\PriceListCustomers as ResourcePriceListCustomers;
+use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Reflection\DataObjectProcessor;
+use Magento\Store\Model\StoreManagerInterface;
+use SuttonSilver\PriceLists\Api\Data\PriceListCustomersInterface;
+use SuttonSilver\PriceLists\Api\Data\PriceListCustomersInterfaceFactory;
+use SuttonSilver\PriceLists\Api\Data\PriceListCustomersSearchResultsInterfaceFactory;
 use SuttonSilver\PriceLists\Api\PriceListCustomersRepositoryInterface;
+use SuttonSilver\PriceLists\Model\ResourceModel\PriceListCustomers as ResourcePriceListCustomers;
+use SuttonSilver\PriceLists\Model\ResourceModel\PriceListCustomers\CollectionFactory as PriceListCustomersCollectionFactory;
 
+/**
+ * Class PriceListCustomersRepository
+ * @package SuttonSilver\PriceLists\Model
+ */
 class PriceListCustomersRepository implements PriceListCustomersRepositoryInterface
 {
 
+    /**
+     * @var DataObjectHelper
+     */
     protected $dataObjectHelper;
 
+    /**
+     * @var StoreManagerInterface
+     */
     private $storeManager;
 
+    /**
+     * @var PriceListCustomersSearchResultsInterfaceFactory
+     */
     protected $searchResultsFactory;
 
+    /**
+     * @var DataObjectProcessor
+     */
     protected $dataObjectProcessor;
-
+    /**
+     * @var JoinProcessorInterface
+     */
     protected $extensionAttributesJoinProcessor;
-
+    /**
+     * @var CollectionProcessorInterface
+     */
     private $collectionProcessor;
-
+    /**
+     * @var ExtensibleDataObjectConverter
+     */
     protected $extensibleDataObjectConverter;
+    /**
+     * @var PriceListCustomersCollectionFactory
+     */
     protected $priceListCustomersCollectionFactory;
-
+    /**
+     * @var ResourcePriceListCustomers
+     */
     protected $resource;
-
+    /**
+     * @var PriceListCustomersFactory
+     */
     protected $priceListCustomersFactory;
-
+    /**
+     * @var PriceListCustomersInterfaceFactory
+     */
     protected $dataPriceListCustomersFactory;
-
 
     /**
      * @param ResourcePriceListCustomers $resource
@@ -90,21 +121,21 @@ class PriceListCustomersRepository implements PriceListCustomersRepositoryInterf
      * {@inheritdoc}
      */
     public function save(
-        \SuttonSilver\PriceLists\Api\Data\PriceListCustomersInterface $priceListCustomers
+        PriceListCustomersInterface $priceListCustomers
     ) {
         /* if (empty($priceListCustomers->getStoreId())) {
             $storeId = $this->storeManager->getStore()->getId();
             $priceListCustomers->setStoreId($storeId);
         } */
-        
+
         $priceListCustomersData = $this->extensibleDataObjectConverter->toNestedArray(
             $priceListCustomers,
             [],
-            \SuttonSilver\PriceLists\Api\Data\PriceListCustomersInterface::class
+            PriceListCustomersInterface::class
         );
-        
+
         $priceListCustomersModel = $this->priceListCustomersFactory->create()->setData($priceListCustomersData);
-        
+
         try {
             $this->resource->save($priceListCustomersModel);
         } catch (\Exception $exception) {
@@ -136,22 +167,22 @@ class PriceListCustomersRepository implements PriceListCustomersRepositoryInterf
         \Magento\Framework\Api\SearchCriteriaInterface $criteria
     ) {
         $collection = $this->priceListCustomersCollectionFactory->create();
-        
+
         $this->extensionAttributesJoinProcessor->process(
             $collection,
-            \SuttonSilver\PriceLists\Api\Data\PriceListCustomersInterface::class
+            PriceListCustomersInterface::class
         );
-        
+
         $this->collectionProcessor->process($criteria, $collection);
-        
+
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($criteria);
-        
+
         $items = [];
         foreach ($collection as $model) {
             $items[] = $model->getDataModel();
         }
-        
+
         $searchResults->setItems($items);
         $searchResults->setTotalCount($collection->getSize());
         return $searchResults;
@@ -161,7 +192,7 @@ class PriceListCustomersRepository implements PriceListCustomersRepositoryInterf
      * {@inheritdoc}
      */
     public function delete(
-        \SuttonSilver\PriceLists\Api\Data\PriceListCustomersInterface $priceListCustomers
+        PriceListCustomersInterface $priceListCustomers
     ) {
         try {
             $priceListCustomersModel = $this->priceListCustomersFactory->create();

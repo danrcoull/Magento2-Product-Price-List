@@ -12,6 +12,10 @@ use Magento\Framework\App\CacheInterface;
 use Magento\Framework\DataObjectFactory;
 use Magento\Framework\Serialize\SerializerInterface;
 
+/**
+ * Class Customers
+ * @package SuttonSilver\PriceLists\Model\Config\Source
+ */
 class Customers implements \Magento\Framework\Data\OptionSourceInterface
 {
     private $_customerCollection;

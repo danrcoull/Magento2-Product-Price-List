@@ -9,6 +9,10 @@ namespace SuttonSilver\PriceLists\Block\Adminhtml\PriceList\Edit;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
+/**
+ * Class DeleteButton
+ * @package SuttonSilver\PriceLists\Block\Adminhtml\PriceList\Edit
+ */
 class DeleteButton extends GenericButton implements ButtonProviderInterface
 {
 

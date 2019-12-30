@@ -7,22 +7,37 @@
 
 namespace SuttonSilver\PriceLists\Controller\Adminhtml\PriceList;
 
-use Magento\Customer\Model\ResourceModel\Customer\CollectionFactory;
+use Magento\Backend\App\Action\Context;
 use Magento\Customer\Api\Data\CustomerInterface;
+use Magento\Customer\Model\ResourceModel\Customer\CollectionFactory;
+use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Exception\LocalizedException;
 
+/**
+ * Class SearchCustomers
+ * @package SuttonSilver\PriceLists\Controller\Adminhtml\PriceList
+ */
 class SearchCustomers extends \Magento\Backend\App\Action
 {
 
     /**
-     * @var \Magento\Framework\Controller\Result\JsonFactory
+     * @var CollectionFactory
      */
     private $customerCollection;
+    /**
+     * @var JsonFactory
+     */
     private $jsonResultFactory;
 
+    /**
+     * SearchCustomers constructor.
+     * @param Context $context
+     * @param JsonFactory $jsonResultFactory
+     * @param CollectionFactory $customerCollection
+     */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Controller\Result\JsonFactory $jsonResultFactory,
+        Context $context,
+        JsonFactory $jsonResultFactory,
         CollectionFactory $customerCollection
     ) {
         $this->jsonResultFactory = $jsonResultFactory;
@@ -30,15 +45,17 @@ class SearchCustomers extends \Magento\Backend\App\Action
         parent::__construct($context);
     }
 
+    /**
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Json|\Magento\Framework\Controller\ResultInterface
+     */
     public function execute()
     {
-
         $searchKey = $this->getRequest()->getParam('searchKey');
         $pageNum = (int)$this->getRequest()->getParam('page');
         $limit = (int)$this->getRequest()->getParam('limit');
 
         $collection = $this->customerCollection->create()->addNameToSelect();
-        if($searchKey != "") {
+        if ($searchKey != "") {
             try {
                 $collection->addAttributeToFilter('firstname', ['like' => $searchKey . '%']);
             } catch (LocalizedException $e) {
@@ -67,6 +84,5 @@ class SearchCustomers extends \Magento\Backend\App\Action
             'options' => $customerById,
             'total' => empty($customerById) ? 0 : $totalValues
         ]);
-
     }
 }

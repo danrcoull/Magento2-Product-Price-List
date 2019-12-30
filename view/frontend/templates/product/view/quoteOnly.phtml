@@ -1,0 +1,17 @@
+<div class="flex product-add-form">
+    <div class="item">
+        <h4><?= __('New Customer? Call for a quote!'); ?></h4>
+        <a href="tel:+<?= $block->getPhone(); ?>" title="Call Us for a quote">
+            <span><?= $block->getPhone(); ?></span>
+        </a>
+    </div>
+    <?php if ($block->isLoggedIn() == true): ?>
+    <div class="item">
+        <h4><?= __('Existing Customer?'); ?></h4>
+        <a class="login" href="<?= $block->getUrl('customer/account/login'); ?>" title="customer login">
+            <span><?= __('Customer Login'); ?></span>
+        </a>
+    </div>
+
+    <?php endif; ?>
+</div>

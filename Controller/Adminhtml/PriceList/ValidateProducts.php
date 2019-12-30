@@ -7,28 +7,55 @@
 
 namespace SuttonSilver\PriceLists\Controller\Adminhtml\PriceList;
 
+use Magento\Backend\App\Action;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\SortOrder;
 use Magento\Framework\Api\SortOrderBuilder;
+use Magento\Framework\Controller\Result\JsonFactory;
 
-class ValidateProducts extends \Magento\Backend\App\Action
+/**
+ * Class ValidateProducts
+ * @package SuttonSilver\PriceLists\Controller\Adminhtml\PriceList
+ */
+class ValidateProducts extends Action
 {
 
     /**
-     * @var \Magento\Framework\Controller\Result\JsonFactory
+     * @var CollectionFactory
      */
     private $productCollection;
+    /**
+     * @var JsonFactory
+     */
     private $jsonResultFactory;
+    /**
+     * @var SearchCriteriaBuilder
+     */
     private $searchCriteriaBuilder;
+    /**
+     * @var ProductRepositoryInterface
+     */
     private $productRepository;
+    /**
+     * @var SortOrderBuilder
+     */
     private $sortOrderBuilder;
 
+    /**
+     * ValidateProducts constructor.
+     * @param Action\Context $context
+     * @param JsonFactory $jsonResultFactory
+     * @param SearchCriteriaBuilder $searchCriteriaBuilder
+     * @param CollectionFactory $productCollection
+     * @param SortOrderBuilder $sortOrderBuilder
+     * @param ProductRepositoryInterface $productRepository
+     */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Controller\Result\JsonFactory $jsonResultFactory,
+        JsonFactory $jsonResultFactory,
         SearchCriteriaBuilder $searchCriteriaBuilder,
         CollectionFactory $productCollection,
         SortOrderBuilder $sortOrderBuilder,
@@ -42,14 +69,19 @@ class ValidateProducts extends \Magento\Backend\App\Action
         parent::__construct($context);
     }
 
+    /**
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Json|\Magento\Framework\Controller\ResultInterface
+     */
     public function execute()
     {
+        /** @var  $ids */
         $ids = json_decode($this->getRequest()->getParam('ids'));
 
         if (is_array($ids)) {
             $this->searchCriteriaBuilder->addFilter('entity_id', $ids, 'in');
             //$this->searchCriteriaBuilder->addFilter('sku', $searchKey, 'like');
         }
+        /** @var  $sortOrder */
         $sortOrder = $this->sortOrderBuilder
             ->setField('name')
             ->setDirection(SortOrder::SORT_DESC)
@@ -57,7 +89,7 @@ class ValidateProducts extends \Magento\Backend\App\Action
 
         $this->searchCriteriaBuilder->addSortOrder($sortOrder);
 
-
+        /** @var  $searchCriteria */
         $searchCriteria = $this->searchCriteriaBuilder->create();
 
         $products = $this->productRepository

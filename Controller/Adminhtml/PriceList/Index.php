@@ -7,20 +7,31 @@
 
 namespace SuttonSilver\PriceLists\Controller\Adminhtml\PriceList;
 
-class Index extends \Magento\Backend\App\Action
+use Magento\Backend\App\Action;
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\View\Result\PageFactory;
+
+/**
+ * Class Index
+ * @package SuttonSilver\PriceLists\Controller\Adminhtml\PriceList
+ */
+class Index extends Action
 {
 
+    /**
+     * @var PageFactory
+     */
     protected $resultPageFactory;
 
     /**
      * Constructor
      *
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
+     * @param Context $context
+     * @param PageFactory $resultPageFactory
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory
+        Context $context,
+        PageFactory $resultPageFactory
     ) {
         $this->resultPageFactory = $resultPageFactory;
         parent::__construct($context);
@@ -34,7 +45,7 @@ class Index extends \Magento\Backend\App\Action
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-            $resultPage->getConfig()->getTitle()->prepend(__("PriceList"));
-            return $resultPage;
+        $resultPage->getConfig()->getTitle()->prepend(__("PriceList"));
+        return $resultPage;
     }
 }

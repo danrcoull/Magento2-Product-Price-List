@@ -7,7 +7,13 @@
 
 namespace SuttonSilver\PriceLists\Controller\Adminhtml\PriceList;
 
-class Delete extends \SuttonSilver\PriceLists\Controller\Adminhtml\PriceList
+use SuttonSilver\PriceLists\Controller\Adminhtml\PriceList;
+
+/**
+ * Class Delete
+ * @package SuttonSilver\PriceLists\Controller\Adminhtml\PriceList
+ */
+class Delete extends PriceList
 {
 
     /**

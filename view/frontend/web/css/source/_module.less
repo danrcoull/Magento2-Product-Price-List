@@ -1,0 +1,45 @@
+/*
+ * Daniel Coull <d.coull@suttonsilver.co.uk>
+ * 2019-2020
+ *
+ */
+.product-info-main {
+  .flex {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+    background: @color-white;
+    overflow: hidden;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    border: solid 1px @button-primary__background;
+    padding-top: 0;
+
+    .item {
+      flex: 1 1 auto;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: @button-primary__background;
+      flex-direction: column;
+      max-width: 50%;
+      .login {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-width: 120px;
+        max-width: 200px;
+        background: @button-primary__background;
+        padding: 11px 25px;
+        color: @color-white;
+        border: none;
+        cursor: pointer;
+        -moz-border-radius: 2.5em;
+        -webkit-border-radius: 2.5em;
+        border-radius: 2.5em;
+      }
+    }
+  }
+}

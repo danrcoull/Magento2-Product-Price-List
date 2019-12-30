@@ -7,20 +7,31 @@
 
 namespace SuttonSilver\PriceLists\Controller\Adminhtml\PriceList;
 
-class Edit extends \SuttonSilver\PriceLists\Controller\Adminhtml\PriceList
-{
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\Registry;
+use Magento\Framework\View\Result\PageFactory;
+use SuttonSilver\PriceLists\Controller\Adminhtml\PriceList;
 
+/**
+ * Class Edit
+ * @package SuttonSilver\PriceLists\Controller\Adminhtml\PriceList
+ */
+class Edit extends PriceList
+{
+    /**
+     * @var PageFactory
+     */
     protected $resultPageFactory;
 
     /**
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Registry $coreRegistry
-     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
+     * @param Context $context
+     * @param Registry $coreRegistry
+     * @param PageFactory $resultPageFactory
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Registry $coreRegistry,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory
+        Context $context,
+        Registry $coreRegistry,
+        PageFactory $resultPageFactory
     ) {
         $this->resultPageFactory = $resultPageFactory;
         parent::__construct($context, $coreRegistry);
@@ -36,7 +47,7 @@ class Edit extends \SuttonSilver\PriceLists\Controller\Adminhtml\PriceList
         // 1. Get ID and create model
         $id = $this->getRequest()->getParam('pricelist_id');
         $model = $this->_objectManager->create(\SuttonSilver\PriceLists\Model\PriceList::class);
-        
+
         // 2. Initial checking
         if ($id) {
             $model->load($id);
@@ -48,7 +59,7 @@ class Edit extends \SuttonSilver\PriceLists\Controller\Adminhtml\PriceList
             }
         }
         $this->_coreRegistry->register('suttonsilver_pricelists_pricelist', $model);
-        
+
         // 3. Build edit form
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();

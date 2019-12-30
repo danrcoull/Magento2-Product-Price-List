@@ -9,6 +9,10 @@ namespace SuttonSilver\PriceLists\Block\Adminhtml\PriceList\Edit;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
+/**
+ * Class BackButton
+ * @package SuttonSilver\PriceLists\Block\Adminhtml\PriceList\Edit
+ */
 class BackButton extends GenericButton implements ButtonProviderInterface
 {
 
