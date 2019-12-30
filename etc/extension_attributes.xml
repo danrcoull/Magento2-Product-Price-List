@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+  ~ Daniel Coull <d.coull@suttonsilver.co.uk>
+  ~ 2019-2020
+  ~
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Magento\Catalog\Api\Data\ProductInterface">
+        <attribute code="custom_price" type="float" />
+        <attribute code="original_price" type="float" />
+    </extension_attributes>
+</config>

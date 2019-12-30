@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<!--
+  ~ Daniel Coull <d.coull@suttonsilver.co.uk>
+  ~ 2019-2020
+  ~
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="SuttonSilver\PriceLists\Api\PriceListRepositoryInterface" type="SuttonSilver\PriceLists\Model\PriceListRepository"/>
+	<preference for="SuttonSilver\PriceLists\Api\Data\PriceListInterface" type="SuttonSilver\PriceLists\Model\Data\PriceList"/>
+	<preference for="SuttonSilver\PriceLists\Api\Data\PriceListSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="SuttonSilver\PriceLists\Model\ResourceModel\PriceList\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">suttonsilver_pricelists_pricelist</argument>
+			<argument name="resourceModel" xsi:type="string">SuttonSilver\PriceLists\Model\ResourceModel\PriceList\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="suttonsilver_pricelists_pricelist_listing_data_source" xsi:type="string">SuttonSilver\PriceLists\Model\ResourceModel\PriceList\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+	<preference for="SuttonSilver\PriceLists\Api\PriceListCustomersRepositoryInterface" type="SuttonSilver\PriceLists\Model\PriceListCustomersRepository"/>
+	<preference for="SuttonSilver\PriceLists\Api\Data\PriceListCustomersInterface" type="SuttonSilver\PriceLists\Model\Data\PriceListCustomers"/>
+	<preference for="SuttonSilver\PriceLists\Api\Data\PriceListCustomersSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<preference for="SuttonSilver\PriceLists\Api\PriceListProductsRepositoryInterface" type="SuttonSilver\PriceLists\Model\PriceListProductsRepository"/>
+	<preference for="SuttonSilver\PriceLists\Api\Data\PriceListProductsInterface" type="SuttonSilver\PriceLists\Model\Data\PriceListProducts"/>
+	<preference for="SuttonSilver\PriceLists\Api\Data\PriceListProductsSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
+	<type name="Magento\Catalog\Api\ProductRepositoryInterface">
+		<plugin disabled="false" name="SuttonSilver_PriceLists_Plugin_Magento_Catalog_Api_ProductRepositoryInterface" sortOrder="10" type="SuttonSilver\PriceLists\Plugin\Magento\Catalog\Api\ProductRepositoryInterface"/>
+	</type>
+	<type name="Magento\Catalog\Controller\Category\View">
+		<plugin disabled="false" name="SuttonSilver_PriceLists_Plugin_Magento_Catalog_Controller_Category_View" sortOrder="10" type="SuttonSilver\PriceLists\Plugin\Magento\Catalog\Controller\Category\View"/>
+	</type>
+	<type name="Magento\Catalog\Block\Product\ListProduct">
+		<plugin disabled="false" name="SuttonSilver_PriceLists_Plugin_Magento_Catalog_Block_Product_ListProduct" sortOrder="10" type="SuttonSilver\PriceLists\Plugin\Magento\Catalog\Block\Product\ListProduct"/>
+	</type>
+</config>

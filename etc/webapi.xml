@@ -1,0 +1,99 @@
+<?xml version="1.0" ?>
+<!--
+  ~ Daniel Coull <d.coull@suttonsilver.co.uk>
+  ~ 2019-2020
+  ~
+  -->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+	<route method="POST" url="/V1/suttonsilver-pricelists/pricelist">
+		<service class="SuttonSilver\PriceLists\Api\PriceListRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="SuttonSilver_PriceLists::PriceList_save"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/suttonsilver-pricelists/pricelist/search">
+		<service class="SuttonSilver\PriceLists\Api\PriceListRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="SuttonSilver_PriceLists::PriceList_view"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/suttonsilver-pricelists/pricelist/:pricelistId">
+		<service class="SuttonSilver\PriceLists\Api\PriceListRepositoryInterface" method="get"/>
+		<resources>
+			<resource ref="SuttonSilver_PriceLists::PriceList_view"/>
+		</resources>
+	</route>
+	<route method="PUT" url="/V1/suttonsilver-pricelists/pricelist/:pricelistId">
+		<service class="SuttonSilver\PriceLists\Api\PriceListRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="SuttonSilver_PriceLists::PriceList_update"/>
+		</resources>
+	</route>
+	<route method="DELETE" url="/V1/suttonsilver-pricelists/pricelist/:pricelistId">
+		<service class="SuttonSilver\PriceLists\Api\PriceListRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="SuttonSilver_PriceLists::PriceList_delete"/>
+		</resources>
+	</route>
+	<route method="POST" url="/V1/suttonsilver-pricelists/pricelistcustomers">
+		<service class="SuttonSilver\PriceLists\Api\PriceListCustomersRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="SuttonSilver_PriceLists::PriceListCustomers_save"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/suttonsilver-pricelists/pricelistcustomers/search">
+		<service class="SuttonSilver\PriceLists\Api\PriceListCustomersRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="SuttonSilver_PriceLists::PriceListCustomers_view"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/suttonsilver-pricelists/pricelistcustomers/:pricelistcustomersId">
+		<service class="SuttonSilver\PriceLists\Api\PriceListCustomersRepositoryInterface" method="get"/>
+		<resources>
+			<resource ref="SuttonSilver_PriceLists::PriceListCustomers_view"/>
+		</resources>
+	</route>
+	<route method="PUT" url="/V1/suttonsilver-pricelists/pricelistcustomers/:pricelistcustomersId">
+		<service class="SuttonSilver\PriceLists\Api\PriceListCustomersRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="SuttonSilver_PriceLists::PriceListCustomers_update"/>
+		</resources>
+	</route>
+	<route method="DELETE" url="/V1/suttonsilver-pricelists/pricelistcustomers/:pricelistcustomersId">
+		<service class="SuttonSilver\PriceLists\Api\PriceListCustomersRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="SuttonSilver_PriceLists::PriceListCustomers_delete"/>
+		</resources>
+	</route>
+	<route method="POST" url="/V1/suttonsilver-pricelists/pricelistproducts">
+		<service class="SuttonSilver\PriceLists\Api\PriceListProductsRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="SuttonSilver_PriceLists::PriceListProducts_save"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/suttonsilver-pricelists/pricelistproducts/search">
+		<service class="SuttonSilver\PriceLists\Api\PriceListProductsRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="SuttonSilver_PriceLists::PriceListProducts_view"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/suttonsilver-pricelists/pricelistproducts/:pricelistproductsId">
+		<service class="SuttonSilver\PriceLists\Api\PriceListProductsRepositoryInterface" method="get"/>
+		<resources>
+			<resource ref="SuttonSilver_PriceLists::PriceListProducts_view"/>
+		</resources>
+	</route>
+	<route method="PUT" url="/V1/suttonsilver-pricelists/pricelistproducts/:pricelistproductsId">
+		<service class="SuttonSilver\PriceLists\Api\PriceListProductsRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="SuttonSilver_PriceLists::PriceListProducts_update"/>
+		</resources>
+	</route>
+	<route method="DELETE" url="/V1/suttonsilver-pricelists/pricelistproducts/:pricelistproductsId">
+		<service class="SuttonSilver\PriceLists\Api\PriceListProductsRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="SuttonSilver_PriceLists::PriceListProducts_delete"/>
+		</resources>
+	</route>
+</routes>

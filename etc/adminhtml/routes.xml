@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<!--
+  ~ Daniel Coull <d.coull@suttonsilver.co.uk>
+  ~ 2019-2020
+  ~
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+	<router id="admin">
+		<route frontName="suttonsilver_pricelists" id="suttonsilver_pricelists">
+			<module before="Magento_Backend" name="SuttonSilver_PriceLists"/>
+		</route>
+	</router>
+</config>

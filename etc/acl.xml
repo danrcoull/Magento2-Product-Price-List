@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<!--
+  ~ Daniel Coull <d.coull@suttonsilver.co.uk>
+  ~ 2019-2020
+  ~
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="SuttonSilver_PriceLists::PriceList" sortOrder="10" title="PriceList">
+					<resource id="SuttonSilver_PriceLists::PriceList_save" sortOrder="10" title="Save PriceList"/>
+					<resource id="SuttonSilver_PriceLists::PriceList_delete" sortOrder="20" title="Delete PriceList"/>
+					<resource id="SuttonSilver_PriceLists::PriceList_update" sortOrder="30" title="Update PriceList"/>
+					<resource id="SuttonSilver_PriceLists::PriceList_view" sortOrder="40" title="View PriceList"/>
+				</resource>
+				<resource id="SuttonSilver_PriceLists::PriceListCustomers" sortOrder="10" title="PriceListCustomers">
+					<resource id="SuttonSilver_PriceLists::PriceListCustomers_save" sortOrder="10" title="Save PriceListCustomers"/>
+					<resource id="SuttonSilver_PriceLists::PriceListCustomers_delete" sortOrder="20" title="Delete PriceListCustomers"/>
+					<resource id="SuttonSilver_PriceLists::PriceListCustomers_update" sortOrder="30" title="Update PriceListCustomers"/>
+					<resource id="SuttonSilver_PriceLists::PriceListCustomers_view" sortOrder="40" title="View PriceListCustomers"/>
+				</resource>
+				<resource id="SuttonSilver_PriceLists::PriceListProducts" sortOrder="10" title="PriceListProducts">
+					<resource id="SuttonSilver_PriceLists::PriceListProducts_save" sortOrder="10" title="Save PriceListProducts"/>
+					<resource id="SuttonSilver_PriceLists::PriceListProducts_delete" sortOrder="20" title="Delete PriceListProducts"/>
+					<resource id="SuttonSilver_PriceLists::PriceListProducts_update" sortOrder="30" title="Update PriceListProducts"/>
+					<resource id="SuttonSilver_PriceLists::PriceListProducts_view" sortOrder="40" title="View PriceListProducts"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

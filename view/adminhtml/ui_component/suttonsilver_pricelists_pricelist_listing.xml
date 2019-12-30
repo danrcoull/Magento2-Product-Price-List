@@ -1,0 +1,114 @@
+<?xml version="1.0" ?>
+<!--
+  ~ Daniel Coull <d.coull@suttonsilver.co.uk>
+  ~ 2019-2020
+  ~
+  -->
+
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">suttonsilver_pricelists_pricelist_listing.suttonsilver_pricelists_pricelist_listing_data_source</item>
+		</item>
+	</argument>
+	<settings>
+		<spinner>suttonsilver_pricelists_pricelist_columns</spinner>
+		<deps>
+			<dep>suttonsilver_pricelists_pricelist_listing.suttonsilver_pricelists_pricelist_listing_data_source</dep>
+		</deps>
+		<buttons>
+			<button name="add">
+				<url path="*/*/new"/>
+				<class>primary</class>
+				<label translate="true">Add new PriceList</label>
+			</button>
+		</buttons>
+	</settings>
+	<dataSource component="Magento_Ui/js/grid/provider" name="suttonsilver_pricelists_pricelist_listing_data_source">
+		<settings>
+			<updateUrl path="mui/index/render"/>
+		</settings>
+		<aclResource>SuttonSilver_PriceLists::PriceList</aclResource>
+		<dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="suttonsilver_pricelists_pricelist_listing_data_source">
+			<settings>
+				<requestFieldName>id</requestFieldName>
+				<primaryFieldName>pricelist_id</primaryFieldName>
+			</settings>
+		</dataProvider>
+	</dataSource>
+	<listingToolbar name="listing_top">
+		<settings>
+			<sticky>true</sticky>
+		</settings>
+		<bookmark name="bookmarks"/>
+		<columnsControls name="columns_controls"/>
+		<filters name="listing_filters"/>
+		<paging name="listing_paging"/>
+	</listingToolbar>
+	<columns name="suttonsilver_pricelists_pricelist_columns">
+		<settings>
+			<editorConfig>
+				<param name="selectProvider" xsi:type="string">suttonsilver_pricelists_pricelist_listing.suttonsilver_pricelists_pricelist_listing.suttonsilver_pricelists_pricelist_columns.ids</param>
+				<param name="enabled" xsi:type="boolean">true</param>
+				<param name="indexField" xsi:type="string">pricelist_id</param>
+				<param name="clientConfig" xsi:type="array">
+					<item name="saveUrl" path="suttonsilver_pricelists/PriceList/inlineEdit" xsi:type="url"/>
+					<item name="validateBeforeSave" xsi:type="boolean">false</item>
+				</param>
+			</editorConfig>
+			<childDefaults>
+				<param name="fieldAction" xsi:type="array">
+					<item name="provider" xsi:type="string">suttonsilver_pricelists_pricelist_listing.suttonsilver_pricelists_pricelist_listing.suttonsilver_pricelists_pricelist_columns_editor</item>
+					<item name="target" xsi:type="string">startEdit</item>
+					<item name="params" xsi:type="array">
+						<item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+						<item name="1" xsi:type="boolean">true</item>
+					</item>
+				</param>
+			</childDefaults>
+		</settings>
+		<selectionsColumn name="ids">
+			<settings>
+				<indexField>pricelist_id</indexField>
+			</settings>
+		</selectionsColumn>
+		<column name="pricelist_id">
+			<settings>
+				<filter>text</filter>
+				<sorting>asc</sorting>
+				<label translate="true">ID</label>
+			</settings>
+		</column>
+		<column name="name">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Price List Name</label>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+		<actionsColumn class="SuttonSilver\PriceLists\Ui\Component\Listing\Column\PriceListActions" name="actions">
+			<settings>
+				<indexField>pricelist_id</indexField>
+				<resizeEnabled>false</resizeEnabled>
+				<resizeDefaultWidth>107</resizeDefaultWidth>
+			</settings>
+		</actionsColumn>
+		<column name="description">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Price List Description</label>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+	</columns>
+</listing>
