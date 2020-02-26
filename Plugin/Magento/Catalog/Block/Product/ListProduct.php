@@ -7,7 +7,7 @@
 
 namespace SuttonSilver\PriceLists\Plugin\Magento\Catalog\Block\Product;
 
-use SuttonSilver\PriceLists\Model\PriceListData;
+use \SuttonSilver\PriceLists\Model\PriceListData;
 
 class ListProduct
 {
@@ -20,10 +20,7 @@ class ListProduct
      * @var \Magento\Catalog\Model\Layer\Resolver
      */
     private $layerResolver;
-    /**
-     * @var \Magento\Catalog\Model\Layer\Resolver
-     */
-    private $layerResolver;
+
     /**
      * @var \Magento\Customer\Model\SessionFactory
      */
