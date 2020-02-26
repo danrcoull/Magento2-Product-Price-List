@@ -79,19 +79,6 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 
         foreach ($items as $model) {
             $this->loadedData[$model->getPricelistId()] = $model->getData();
-        }
-        $data = $this->dataPersistor->get('suttonsilver_pricelists_pricelist');
-
-        $model = false;
-        if (!empty($data)) {
-            $model = $this->collection->getNewEmptyItem();
-            $model->setData($data);
-            $this->loadedData[$model->getPricelistId()] = $model->getData();
-
-            $this->dataPersistor->clear('suttonsilver_pricelists_pricelist');
-        }
-
-        if($model) {
             $collection = $this->priceListCustomersCollection->create()
                 ->addFieldToFilter('price_list_id', $model->getPricelistId());
 
@@ -117,10 +104,18 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
                     'product_price' => $key
                 ];
             }
-
-            $this->dataPersistor->set('suttonsilver_pricelists_pricelist',  $this->loadedData[$model->getPricelistId()]);
         }
+        $data = $this->dataPersistor->get('suttonsilver_pricelists_pricelist');
 
+        $model = false;
+        if (!empty($data)) {
+
+            $model = $this->collection->getNewEmptyItem();
+            $model->setData($data);
+            $this->loadedData[$model->getPricelistId()] = $model->getData();
+
+            $this->dataPersistor->clear('suttonsilver_pricelists_pricelist');
+        }
 
         return $this->loadedData;
     }
