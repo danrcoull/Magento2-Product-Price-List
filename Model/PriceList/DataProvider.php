@@ -11,11 +11,22 @@ use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\UrlInterface;
 
 use SuttonSilver\PriceLists\Model\ResourceModel\PriceList\CollectionFactory;
+use SuttonSilver\PriceLists\Model\ResourceModel\PriceList\Collection;
 
+/**
+ * Class DataProvider
+ * @package SuttonSilver\PriceLists\Model\PriceList
+ */
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
+    /**
+     * @var Collection
+     */
     protected $collection;
 
+    /**
+     * @var DataPersistorInterface
+     */
     protected $dataPersistor;
 
     protected $loadedData;
@@ -65,40 +76,51 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             return $this->loadedData;
         }
         $items = $this->collection->getItems();
+
         foreach ($items as $model) {
-            $this->loadedData[$model->getId()] = $model->getData();
+            $this->loadedData[$model->getPricelistId()] = $model->getData();
         }
         $data = $this->dataPersistor->get('suttonsilver_pricelists_pricelist');
 
+        $model = false;
         if (!empty($data)) {
             $model = $this->collection->getNewEmptyItem();
             $model->setData($data);
-            $this->loadedData[$model->getId()] = $model->getData();
+            $this->loadedData[$model->getPricelistId()] = $model->getData();
 
             $this->dataPersistor->clear('suttonsilver_pricelists_pricelist');
         }
 
-        $collection = $this->priceListCustomersCollection->create()
-            ->addFieldToFilter('price_list_id', $model->getId());
+        if($model) {
+            $collection = $this->priceListCustomersCollection->create()
+                ->addFieldToFilter('price_list_id', $model->getPricelistId());
 
-        foreach ($collection as $key => $customer) {
-            $this->loadedData[$model->getId()]['customers'][] = $customer->getPriceListCustomerId();
+            foreach ($collection as $key => $customer) {
+                $this->loadedData[$model->getPricelistId()]['customers'][] = $customer->getPriceListCustomerId();
+            }
+
+
+
+            $collection = $this->priceListProductsCollection->create()
+                ->addFieldToFilter('price_list_id', $model->getPricelistId());
+
+            $p = [];
+            foreach ($collection as $products) {
+                $p[$products->getPriceListProductPrice()][] = $products->getPriceListProductId();
+            }
+
+
+
+            foreach ($p as $key => $productSet) {
+                $this->loadedData[$model->getPricelistId()]['products'][] = [
+                    'product_id' => $productSet,
+                    'product_price' => $key
+                ];
+            }
+
+            $this->dataPersistor->set('suttonsilver_pricelists_pricelist',  $this->loadedData[$model->getPricelistId()]);
         }
 
-        $collection = $this->priceListProductsCollection->create()
-            ->addFieldToFilter('price_list_id', $model->getId());
-
-        $p = [];
-        foreach ($collection as $products) {
-            $p[$products->getPriceListProductPrice()][] = $products->getPriceListProductId();
-        }
-
-        foreach ($p as $key => $productSet) {
-            $this->loadedData[$model->getId()]['products'][] = [
-                'product_id' => $productSet,
-                'product_price' => $key
-            ];
-        }
 
         return $this->loadedData;
     }

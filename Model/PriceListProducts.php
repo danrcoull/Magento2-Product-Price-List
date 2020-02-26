@@ -7,35 +7,50 @@
 
 namespace SuttonSilver\PriceLists\Model;
 
+use Magento\Framework\Model\Context;
+use Magento\Framework\Registry;
 use SuttonSilver\PriceLists\Api\Data\PriceListProductsInterfaceFactory;
 use Magento\Framework\Api\DataObjectHelper;
 use SuttonSilver\PriceLists\Api\Data\PriceListProductsInterface;
+use SuttonSilver\PriceLists\Model\ResourceModel\PriceListProducts\Collection;
 
+/**
+ * Class PriceListProducts
+ * @package SuttonSilver\PriceLists\Model
+ */
 class PriceListProducts extends \Magento\Framework\Model\AbstractModel
 {
 
+    /**
+     * @var DataObjectHelper
+     */
     protected $dataObjectHelper;
-
+    /**
+     * @var PriceListProductsInterfaceFactory
+     */
     protected $pricelistproductsDataFactory;
 
+    /**
+     * @var string
+     */
     protected $_eventPrefix = 'suttonsilver_pricelists_pricelistproducts';
 
     /**
-     * @param \Magento\Framework\Model\Context $context
-     * @param \Magento\Framework\Registry $registry
+     * @param Context $context
+     * @param Registry $registry
      * @param PriceListProductsInterfaceFactory $pricelistproductsDataFactory
      * @param DataObjectHelper $dataObjectHelper
-     * @param \SuttonSilver\PriceLists\Model\ResourceModel\PriceListProducts $resource
-     * @param \SuttonSilver\PriceLists\Model\ResourceModel\PriceListProducts\Collection $resourceCollection
+     * @param ResourceModel\PriceListProducts $resource
+     * @param Collection $resourceCollection
      * @param array $data
      */
     public function __construct(
-        \Magento\Framework\Model\Context $context,
-        \Magento\Framework\Registry $registry,
+        Context $context,
+        Registry $registry,
         PriceListProductsInterfaceFactory $pricelistproductsDataFactory,
         DataObjectHelper $dataObjectHelper,
-        \SuttonSilver\PriceLists\Model\ResourceModel\PriceListProducts $resource,
-        \SuttonSilver\PriceLists\Model\ResourceModel\PriceListProducts\Collection $resourceCollection,
+        ResourceModel\PriceListProducts $resource,
+        Collection $resourceCollection,
         array $data = []
     ) {
         $this->pricelistproductsDataFactory = $pricelistproductsDataFactory;

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+  ~ Daniel Coull <d.coull@suttonsilver.co.uk>
+  ~ 2019-2020
+  ~
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="suttonsilver" translate="label" sortOrder="10">
+            <label>SuttonSilver</label>
+        </tab>
+        <section id="price_lists" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Product Price Lists</label>
+            <tab>suttonsilver</tab>
+            <resource>Magento_Catalog::catalog</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Price List</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="categories_logged_in" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Restrict Categories to logged in only</label>
+                    <comment>redirect logged out customers to loggin from categories</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="restrict_product_lists" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Restrict product list</label>
+                    <comment>redirect product lists to only assigned prices</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="change_template" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Change add to cart template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="add_to_cart_layout_name" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Change add to cart template</label>
+                    <depends><field id="change_template">1</field></depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

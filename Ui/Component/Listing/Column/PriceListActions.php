@@ -7,25 +7,36 @@
 
 namespace SuttonSilver\PriceLists\Ui\Component\Listing\Column;
 
-class PriceListActions extends \Magento\Ui\Component\Listing\Columns\Column
-{
+use Magento\Framework\UrlInterface;
+use Magento\Framework\View\Element\UiComponent\ContextInterface;
+use Magento\Framework\View\Element\UiComponentFactory;
+use Magento\Ui\Component\Listing\Columns\Column;
 
+/**
+ * Class PriceListActions
+ * @package SuttonSilver\PriceLists\Ui\Component\Listing\Column
+ */
+class PriceListActions extends Column
+{
     const URL_PATH_DELETE = 'suttonsilver_pricelists/pricelist/delete';
     const URL_PATH_DETAILS = 'suttonsilver_pricelists/pricelist/details';
     const URL_PATH_EDIT = 'suttonsilver_pricelists/pricelist/edit';
+    /**
+     * @var UrlInterface
+     */
     protected $urlBuilder;
 
     /**
-     * @param \Magento\Framework\View\Element\UiComponent\ContextInterface $context
-     * @param \Magento\Framework\View\Element\UiComponentFactory $uiComponentFactory
-     * @param \Magento\Framework\UrlInterface $urlBuilder
+     * @param ContextInterface $context
+     * @param UiComponentFactory $uiComponentFactory
+     * @param UrlInterface $urlBuilder
      * @param array $components
      * @param array $data
      */
     public function __construct(
-        \Magento\Framework\View\Element\UiComponent\ContextInterface $context,
-        \Magento\Framework\View\Element\UiComponentFactory $uiComponentFactory,
-        \Magento\Framework\UrlInterface $urlBuilder,
+        ContextInterface $context,
+        UiComponentFactory $uiComponentFactory,
+        UrlInterface $urlBuilder,
         array $components = [],
         array $data = []
     ) {
@@ -71,7 +82,7 @@ class PriceListActions extends \Magento\Ui\Component\Listing\Columns\Column
                 }
             }
         }
-        
+
         return $dataSource;
     }
 }

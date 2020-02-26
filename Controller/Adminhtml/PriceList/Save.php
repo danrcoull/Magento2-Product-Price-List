@@ -7,6 +7,7 @@
 
 namespace SuttonSilver\PriceLists\Controller\Adminhtml\PriceList;
 
+use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Request\DataPersistorInterface;
@@ -20,14 +21,39 @@ use SuttonSilver\PriceLists\Api\PriceListCustomersRepositoryInterface;
 use SuttonSilver\PriceLists\Api\PriceListProductsRepositoryInterface;
 use SuttonSilver\PriceLists\Model\ResourceModel\PriceListProducts\Collection;
 
-class Save extends \Magento\Backend\App\Action
+/**
+ * Class Save
+ * @package SuttonSilver\PriceLists\Controller\Adminhtml\PriceList
+ */
+class Save extends Action
 {
+    /**
+     * @var DataPersistorInterface
+     */
     protected $dataPersistor;
+    /**
+     * @var PriceListCustomersRepositoryInterface
+     */
     protected $priceListCustomersRepository;
+    /**
+     * @var PriceListProductsRepositoryInterface
+     */
     protected $priceListProductsRepository;
+    /**
+     * @var PriceListProductsInterfaceFactory
+     */
     protected $priceListProducts;
+    /**
+     * @var PriceListCustomersInterfaceFactory
+     */
     protected $priceListCustomers;
+    /**
+     * @var \SuttonSilver\PriceLists\Model\ResourceModel\PriceListCustomers\CollectionFactory
+     */
     protected $priceListCustomersCollection;
+    /**
+     * @var \SuttonSilver\PriceLists\Model\ResourceModel\PriceListProducts\CollectionFactory
+     */
     protected $priceListProductsCollection;
 
     /**

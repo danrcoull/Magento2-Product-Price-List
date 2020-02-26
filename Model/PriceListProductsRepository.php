@@ -22,28 +22,56 @@ use SuttonSilver\PriceLists\Api\Data\PriceListProductsInterfaceFactory;
 use SuttonSilver\PriceLists\Model\ResourceModel\PriceListProducts as ResourcePriceListProducts;
 use Magento\Framework\Exception\NoSuchEntityException;
 
+/**
+ * Class PriceListProductsRepository
+ * @package SuttonSilver\PriceLists\Model
+ */
 class PriceListProductsRepository implements PriceListProductsRepositoryInterface
 {
 
+    /**
+     * @var DataObjectHelper
+     */
     protected $dataObjectHelper;
-
+    /**
+     * @var StoreManagerInterface
+     */
     private $storeManager;
-
+    /**
+     * @var PriceListProductsInterfaceFactory
+     */
     protected $dataPriceListProductsFactory;
-
+    /**
+     * @var PriceListProductsSearchResultsInterfaceFactory
+     */
     protected $searchResultsFactory;
-
+    /**
+     * @var DataObjectProcessor
+     */
     protected $dataObjectProcessor;
-
+    /**
+     * @var JoinProcessorInterface
+     */
     protected $extensionAttributesJoinProcessor;
-
+    /**
+     * @var CollectionProcessorInterface
+     */
     private $collectionProcessor;
-
+    /**
+     * @var ExtensibleDataObjectConverter
+     */
     protected $extensibleDataObjectConverter;
+    /**
+     * @var ResourcePriceListProducts
+     */
     protected $resource;
-
+    /**
+     * @var PriceListProductsCollectionFactory
+     */
     protected $priceListProductsCollectionFactory;
-
+    /**
+     * @var PriceListProductsFactory 
+     */
     protected $priceListProductsFactory;
 
 

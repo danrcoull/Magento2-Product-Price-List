@@ -7,26 +7,36 @@
 
 namespace SuttonSilver\PriceLists\Plugin\Magento\Catalog\Api;
 
+use Magento\Catalog\Api\Data\ProductExtensionFactory;
+use Magento\Catalog\Api\Data\ProductExtensionInterface;
 use Magento\Catalog\Api\Data\ProductInterface;
-use Magento\Customer\Api\CustomerRepositoryInterface;
-use Magento\Customer\Api\Data\CustomerExtensionInterface;
-use Magento\Customer\Api\Data\CustomerInterface;
+use Magento\Catalog\Api\Data\ProductSearchResultsInterface;
 use SuttonSilver\PriceLists\Model\PriceListData;
 
 class ProductRepositoryInterface
 {
-
+    /**
+     * @var PriceListData
+     */
     protected $priceListData;
-    public function __construct(PriceListData $priceListData)
+
+    /**
+     * Order Extension Attributes Factory
+     *
+     * @var ProductExtensionFactory
+     */
+    protected $extensionFactory;
+
+    public function __construct(PriceListData $priceListData, ProductExtensionFactory $extensionFactory)
     {
         $this->priceListData = $priceListData;
+        $this->extensionFactory = $extensionFactory;
     }
 
     public function afterGetById(
         \Magento\Catalog\Api\ProductRepositoryInterface $subject,
         $result
     ) {
-
         return $this->afterGet($subject, $result);
     }
 
@@ -34,45 +44,47 @@ class ProductRepositoryInterface
         \Magento\Catalog\Api\ProductRepositoryInterface $subject,
         $result
     ) {
+        if ($this->priceListData->getGeneralConfig('enable')) {
+            $price = $this->priceListData->getProductPrice($result->getId());
 
-        $price = $this->priceListData->getProductPrice($result->getId());
+            $extension = $this->getExtensionAttributes($result);
+            $extension->setCustomPrice($price);
+            $extension->setOriginalPrice($result->getPrice());
 
-        $extension = $this->getExtensionAttributes($result);
-        $extension->setCustomPrice($price);
-        $extension->setOriginalPrice($result->getPrice());
-
-        $result->setExtensionAttributes($extension);
+            $result->setExtensionAttributes($extension);
+        }
 
         return $result;
     }
 
     public function afterGetList(
-        CustomerRepositoryInterface $subject,
-        \Magento\Customer\Api\Data\CustomerSearchResultsInterface $searchCriteria
-    ) : \Magento\Customer\Api\Data\CustomerSearchResultsInterface {
+        ProductRepositoryInterface $subject,
+        ProductSearchResultsInterface $searchCriteria
+    ) : ProductSearchResultsInterface {
         $products = [];
         foreach ($searchCriteria->getItems() as $entity) {
-            $extensionAttributes = $this->getExtensionAttributes($entity);
-            $price = $this->priceListData($entity->getId());
-            if ($price > 0) {
-                $extensionAttributes->setCustomPrice($price);
-                $extensionAttributes->setOriginalPrice($entity->getPrice());
+            if ($this->priceListData->getGeneralConfig('enable')) {
+                $extensionAttributes = $this->getExtensionAttributes($entity);
+                $price = $this->priceListData($entity->getId());
+                if ($price > 0) {
+                    $extensionAttributes->setCustomPrice($price);
+                    $extensionAttributes->setOriginalPrice($entity->getPrice());
+                }
+
+                $entity->setExtensionAttributes($extensionAttributes);
             }
-
-            $entity->setExtensionAttributes($extensionAttributes);
-
             $products[] = $entity;
         }
         $searchCriteria->setItems($products);
+
         return $searchCriteria;
     }
 
-
     /**
-     * Get a CustomerExtensionInterface object, creating it if it is not yet created
+     * Get a ProductExtensionInterface object, creating it if it is not yet created
      *
      * @param ProductInterface $customer
-     * @return \Magento\Catalog\Api\Data\ProductExtensionInterface|null
+     * @return ProductExtensionInterface|null
      */
     private function getExtensionAttributes(ProductInterface $customer)
     {

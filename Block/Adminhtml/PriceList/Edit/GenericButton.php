@@ -9,6 +9,10 @@ namespace SuttonSilver\PriceLists\Block\Adminhtml\PriceList\Edit;
 
 use Magento\Backend\Block\Widget\Context;
 
+/**
+ * Class GenericButton
+ * @package SuttonSilver\PriceLists\Block\Adminhtml\PriceList\Edit
+ */
 abstract class GenericButton
 {
 

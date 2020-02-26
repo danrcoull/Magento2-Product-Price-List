@@ -7,18 +7,29 @@
 
 namespace SuttonSilver\PriceLists\Controller\Adminhtml\PriceList;
 
-class InlineEdit extends \Magento\Backend\App\Action
+use Magento\Backend\App\Action;
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\Controller\Result\JsonFactory;
+
+/**
+ * Class InlineEdit
+ * @package SuttonSilver\PriceLists\Controller\Adminhtml\PriceList
+ */
+class InlineEdit extends Action
 {
 
+    /**
+     * @var JsonFactory
+     */
     protected $jsonFactory;
 
     /**
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Controller\Result\JsonFactory $jsonFactory
+     * @param Context $context
+     * @param JsonFactory $jsonFactory
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Controller\Result\JsonFactory $jsonFactory
+        Context $context,
+        JsonFactory $jsonFactory
     ) {
         parent::__construct($context);
         $this->jsonFactory = $jsonFactory;
@@ -35,7 +46,7 @@ class InlineEdit extends \Magento\Backend\App\Action
         $resultJson = $this->jsonFactory->create();
         $error = false;
         $messages = [];
-        
+
         if ($this->getRequest()->getParam('isAjax')) {
             $postItems = $this->getRequest()->getParam('items', []);
             if (!count($postItems)) {
@@ -55,7 +66,7 @@ class InlineEdit extends \Magento\Backend\App\Action
                 }
             }
         }
-        
+
         return $resultJson->setData([
             'messages' => $messages,
             'error' => $error

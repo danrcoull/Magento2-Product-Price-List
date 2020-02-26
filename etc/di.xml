@@ -35,7 +35,13 @@
 	<type name="Magento\Catalog\Controller\Category\View">
 		<plugin disabled="false" name="SuttonSilver_PriceLists_Plugin_Magento_Catalog_Controller_Category_View" sortOrder="10" type="SuttonSilver\PriceLists\Plugin\Magento\Catalog\Controller\Category\View"/>
 	</type>
-	<type name="Magento\Catalog\Block\Product\ListProduct">
+	<type name="Magento\Catalog\Controller\Product\View">
+		<plugin disabled="false" name="SuttonSilver_PriceLists_Plugin_Magento_Catalog_Controller_Product_View" sortOrder="10" type="SuttonSilver\PriceLists\Plugin\Magento\Catalog\Controller\Product\View"/>
+	</type>
+	<type name="Magento\Catalog\Model\Layer">
 		<plugin disabled="false" name="SuttonSilver_PriceLists_Plugin_Magento_Catalog_Block_Product_ListProduct" sortOrder="10" type="SuttonSilver\PriceLists\Plugin\Magento\Catalog\Block\Product\ListProduct"/>
+	</type>
+	<type name="Magento\Catalog\Block\Product\View">
+		<plugin disabled="false" name="SuttonSilver_PriceLists_Plugin_Magento_Catalog_Block_Product_View" sortOrder="1" type="SuttonSilver\PriceLists\Plugin\Magento\Catalog\Block\Product\ProductView"/>
 	</type>
 </config>

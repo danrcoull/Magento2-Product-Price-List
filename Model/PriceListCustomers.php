@@ -7,35 +7,49 @@
 
 namespace SuttonSilver\PriceLists\Model;
 
-use SuttonSilver\PriceLists\Api\Data\PriceListCustomersInterface;
 use Magento\Framework\Api\DataObjectHelper;
+use Magento\Framework\Model\Context;
+use Magento\Framework\Registry;
+use SuttonSilver\PriceLists\Api\Data\PriceListCustomersInterface;
 use SuttonSilver\PriceLists\Api\Data\PriceListCustomersInterfaceFactory;
+use SuttonSilver\PriceLists\Model\ResourceModel\PriceListCustomers\Collection;
 
+/**
+ * Class PriceListCustomers
+ * @package SuttonSilver\PriceLists\Model
+ */
 class PriceListCustomers extends \Magento\Framework\Model\AbstractModel
 {
-
+    /**
+     * @var DataObjectHelper
+     */
     protected $dataObjectHelper;
 
+    /**
+     * @var string
+     */
     protected $_eventPrefix = 'suttonsilver_pricelists_pricelistcustomers';
+    /**
+     * @var PriceListCustomersInterfaceFactory
+     */
     protected $pricelistcustomersDataFactory;
 
-
     /**
-     * @param \Magento\Framework\Model\Context $context
-     * @param \Magento\Framework\Registry $registry
+     * @param Context $context
+     * @param Registry $registry
      * @param PriceListCustomersInterfaceFactory $pricelistcustomersDataFactory
      * @param DataObjectHelper $dataObjectHelper
-     * @param \SuttonSilver\PriceLists\Model\ResourceModel\PriceListCustomers $resource
-     * @param \SuttonSilver\PriceLists\Model\ResourceModel\PriceListCustomers\Collection $resourceCollection
+     * @param ResourceModel\PriceListCustomers $resource
+     * @param Collection $resourceCollection
      * @param array $data
      */
     public function __construct(
-        \Magento\Framework\Model\Context $context,
-        \Magento\Framework\Registry $registry,
+        Context $context,
+        Registry $registry,
         PriceListCustomersInterfaceFactory $pricelistcustomersDataFactory,
         DataObjectHelper $dataObjectHelper,
-        \SuttonSilver\PriceLists\Model\ResourceModel\PriceListCustomers $resource,
-        \SuttonSilver\PriceLists\Model\ResourceModel\PriceListCustomers\Collection $resourceCollection,
+        ResourceModel\PriceListCustomers $resource,
+        Collection $resourceCollection,
         array $data = []
     ) {
         $this->pricelistcustomersDataFactory = $pricelistcustomersDataFactory;
@@ -50,14 +64,14 @@ class PriceListCustomers extends \Magento\Framework\Model\AbstractModel
     public function getDataModel()
     {
         $pricelistcustomersData = $this->getData();
-        
+
         $pricelistcustomersDataObject = $this->pricelistcustomersDataFactory->create();
         $this->dataObjectHelper->populateWithArray(
             $pricelistcustomersDataObject,
             $pricelistcustomersData,
             PriceListCustomersInterface::class
         );
-        
+
         return $pricelistcustomersDataObject;
     }
 }

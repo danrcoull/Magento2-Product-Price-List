@@ -7,6 +7,14 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
 	<menu>
-		<add action="suttonsilver_pricelists/pricelist/index" id="SuttonSilver_PriceLists::suttonsilver_pricelists_pricelist" module="SuttonSilver_PriceLists" parent="Magento_Catalog::catalog_products" resource="Magento_Catalog::catalog" sortOrder="9999" title="PriceList"/>
+		<add action="suttonsilver_pricelists/pricelist/index"
+			 id="SuttonSilver_PriceLists::suttonsilver_pricelists_pricelist"
+			 module="SuttonSilver_PriceLists"
+			 parent="Magento_Catalog::catalog_products"
+			 resource="Magento_Catalog::catalog"
+			 sortOrder="9999"
+			 title="PriceList"
+			 dependsOnConfig="price_lists/general/enable"
+		/>
 	</menu>
 </config>

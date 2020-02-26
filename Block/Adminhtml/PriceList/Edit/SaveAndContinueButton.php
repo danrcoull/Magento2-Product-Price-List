@@ -9,6 +9,10 @@ namespace SuttonSilver\PriceLists\Block\Adminhtml\PriceList\Edit;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
+/**
+ * Class SaveAndContinueButton
+ * @package SuttonSilver\PriceLists\Block\Adminhtml\PriceList\Edit
+ */
 class SaveAndContinueButton extends GenericButton implements ButtonProviderInterface
 {
 

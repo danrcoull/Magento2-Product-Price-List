@@ -9,11 +9,25 @@ Its composed highly of plugins no core overides, so you can safly continue to de
 
 We have also made sure to store the original data in extension attribute at the point of product getById and get and getList on search results, so you can always access it to modify it further. 
 
+You can now configure the module how you so desire, 
 
-Future:
-1. To add config option to turn of category restriction for non logged in users
-2. To modify the price override to always use the lowest price, to comply with the pricing render logic. 
-3. To add the ability to lock down the users in the list to only see products within there assigned lists, by filtering down the categories... In Progress.
+Under System / Configuration / Sutton Silver / Price Lists
+ - Enable Or Disable the module
+ - Restrict the categories / products same option from custoemrs not in the product price lists
+ - replace the add to cart form template if the customer is not in the list, its not restricted and you do not wish them to buy untill they have a quote
+ - the lowest price from all lists is now used to give the price. 
+ - you can now completly restrict the entire list from even showing the products at all, and redirect from the product if directly accessed
+ - category resitrcition is now a configurable option.
+ 
+Code now fully commnented aswell so it should make more sense :D 
+ 
+Ideas: 
+
+Any ideas feel free to post them in issues where to go next with this. 
+
+Other Modules COming Soon:
+
+- Company Hirachy
 
 Installation:
 

@@ -1,0 +1,12 @@
+<?php
+/**
+ * Daniel Coull <d.coull@suttonsilver.co.uk>
+ * 2019-2020
+ *
+ */
+echo $this->getLayout()
+    ->createBlock('SuttonSilver\PriceLists\Block\QuoteOnly', 'quoteonly')
+    ->setTemplate('SuttonSilver_PriceLists::product/view/quoteOnly.phtml')
+    ->toHtml();
+
+

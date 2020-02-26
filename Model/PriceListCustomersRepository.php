@@ -11,6 +11,7 @@ use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\Api\DataObjectHelper;
+use SuttonSilver\PriceLists\Api\Data\PriceListCustomersInterface;
 use SuttonSilver\PriceLists\Api\Data\PriceListCustomersInterfaceFactory;
 use SuttonSilver\PriceLists\Api\Data\PriceListCustomersSearchResultsInterfaceFactory;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
@@ -22,28 +23,59 @@ use SuttonSilver\PriceLists\Model\ResourceModel\PriceListCustomers as ResourcePr
 use Magento\Framework\Exception\NoSuchEntityException;
 use SuttonSilver\PriceLists\Api\PriceListCustomersRepositoryInterface;
 
+/**
+ * Class PriceListCustomersRepository
+ * @package SuttonSilver\PriceLists\Model
+ */
 class PriceListCustomersRepository implements PriceListCustomersRepositoryInterface
 {
 
+    /**
+     * @var DataObjectHelper
+     */
     protected $dataObjectHelper;
 
+    /**
+     * @var StoreManagerInterface
+     */
     private $storeManager;
 
+    /**
+     * @var PriceListCustomersSearchResultsInterfaceFactory
+     */
     protected $searchResultsFactory;
 
+    /**
+     * @var DataObjectProcessor
+     */
     protected $dataObjectProcessor;
-
+    /**
+     * @var JoinProcessorInterface
+     */
     protected $extensionAttributesJoinProcessor;
-
+    /**
+     * @var CollectionProcessorInterface
+     */
     private $collectionProcessor;
-
+    /**
+     * @var ExtensibleDataObjectConverter
+     */
     protected $extensibleDataObjectConverter;
+    /**
+     * @var PriceListCustomersCollectionFactory
+     */
     protected $priceListCustomersCollectionFactory;
-
+    /**
+     * @var ResourcePriceListCustomers
+     */
     protected $resource;
-
+    /**
+     * @var PriceListCustomersFactory
+     */
     protected $priceListCustomersFactory;
-
+    /**
+     * @var PriceListCustomersInterfaceFactory
+     */
     protected $dataPriceListCustomersFactory;
 
 
@@ -90,7 +122,7 @@ class PriceListCustomersRepository implements PriceListCustomersRepositoryInterf
      * {@inheritdoc}
      */
     public function save(
-        \SuttonSilver\PriceLists\Api\Data\PriceListCustomersInterface $priceListCustomers
+        PriceListCustomersInterface $priceListCustomers
     ) {
         /* if (empty($priceListCustomers->getStoreId())) {
             $storeId = $this->storeManager->getStore()->getId();
@@ -100,7 +132,7 @@ class PriceListCustomersRepository implements PriceListCustomersRepositoryInterf
         $priceListCustomersData = $this->extensibleDataObjectConverter->toNestedArray(
             $priceListCustomers,
             [],
-            \SuttonSilver\PriceLists\Api\Data\PriceListCustomersInterface::class
+            PriceListCustomersInterface::class
         );
         
         $priceListCustomersModel = $this->priceListCustomersFactory->create()->setData($priceListCustomersData);
@@ -139,7 +171,7 @@ class PriceListCustomersRepository implements PriceListCustomersRepositoryInterf
         
         $this->extensionAttributesJoinProcessor->process(
             $collection,
-            \SuttonSilver\PriceLists\Api\Data\PriceListCustomersInterface::class
+            PriceListCustomersInterface::class
         );
         
         $this->collectionProcessor->process($criteria, $collection);
@@ -161,7 +193,7 @@ class PriceListCustomersRepository implements PriceListCustomersRepositoryInterf
      * {@inheritdoc}
      */
     public function delete(
-        \SuttonSilver\PriceLists\Api\Data\PriceListCustomersInterface $priceListCustomers
+        PriceListCustomersInterface $priceListCustomers
     ) {
         try {
             $priceListCustomersModel = $this->priceListCustomersFactory->create();

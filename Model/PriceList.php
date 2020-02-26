@@ -7,35 +7,49 @@
 
 namespace SuttonSilver\PriceLists\Model;
 
-use SuttonSilver\PriceLists\Api\Data\PriceListInterface;
 use Magento\Framework\Api\DataObjectHelper;
+use Magento\Framework\Model\Context;
+use Magento\Framework\Registry;
+use SuttonSilver\PriceLists\Api\Data\PriceListInterface;
 use SuttonSilver\PriceLists\Api\Data\PriceListInterfaceFactory;
+use SuttonSilver\PriceLists\Model\ResourceModel\PriceList\Collection;
 
+/**
+ * Class PriceList
+ * @package SuttonSilver\PriceLists\Model
+ */
 class PriceList extends \Magento\Framework\Model\AbstractModel
 {
-
+    /**
+     * @var DataObjectHelper
+     */
     protected $dataObjectHelper;
-
+    /**
+     * @var PriceListInterfaceFactory
+     */
     protected $pricelistDataFactory;
 
+    /**
+     * @var string
+     */
     protected $_eventPrefix = 'suttonsilver_pricelists_pricelist';
 
     /**
-     * @param \Magento\Framework\Model\Context $context
-     * @param \Magento\Framework\Registry $registry
+     * @param Context $context
+     * @param Registry $registry
      * @param PriceListInterfaceFactory $pricelistDataFactory
      * @param DataObjectHelper $dataObjectHelper
-     * @param \SuttonSilver\PriceLists\Model\ResourceModel\PriceList $resource
-     * @param \SuttonSilver\PriceLists\Model\ResourceModel\PriceList\Collection $resourceCollection
+     * @param ResourceModel\PriceList $resource
+     * @param Collection $resourceCollection
      * @param array $data
      */
     public function __construct(
-        \Magento\Framework\Model\Context $context,
-        \Magento\Framework\Registry $registry,
+        Context $context,
+        Registry $registry,
         PriceListInterfaceFactory $pricelistDataFactory,
         DataObjectHelper $dataObjectHelper,
-        \SuttonSilver\PriceLists\Model\ResourceModel\PriceList $resource,
-        \SuttonSilver\PriceLists\Model\ResourceModel\PriceList\Collection $resourceCollection,
+        ResourceModel\PriceList $resource,
+        Collection $resourceCollection,
         array $data = []
     ) {
         $this->pricelistDataFactory = $pricelistDataFactory;
@@ -50,14 +64,14 @@ class PriceList extends \Magento\Framework\Model\AbstractModel
     public function getDataModel()
     {
         $pricelistData = $this->getData();
-        
+
         $pricelistDataObject = $this->pricelistDataFactory->create();
         $this->dataObjectHelper->populateWithArray(
             $pricelistDataObject,
             $pricelistData,
             PriceListInterface::class
         );
-        
+
         return $pricelistDataObject;
     }
 }

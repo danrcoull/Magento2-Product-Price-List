@@ -7,9 +7,14 @@
 
 namespace SuttonSilver\PriceLists\Model\Data;
 
+use Magento\Framework\Api\AbstractExtensibleObject;
 use SuttonSilver\PriceLists\Api\Data\PriceListProductsInterface;
 
-class PriceListProducts extends \Magento\Framework\Api\AbstractExtensibleObject implements PriceListProductsInterface
+/**
+ * Class PriceListProducts
+ * @package SuttonSilver\PriceLists\Model\Data
+ */
+class PriceListProducts extends AbstractExtensibleObject implements PriceListProductsInterface
 {
 
     /**

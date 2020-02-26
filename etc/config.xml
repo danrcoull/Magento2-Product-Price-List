@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+  ~ Daniel Coull <d.coull@suttonsilver.co.uk>
+  ~ 2019-2020
+  ~
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <price_lists>
+            <general>
+                <enable>1</enable>
+                <change_template>0</change_template>
+                <categories_logged_in>1</categories_logged_in>
+                <restrict_product_lists>0</restrict_product_lists>
+                <add_to_cart_layout_name>product.info.addtocart</add_to_cart_layout_name>
+            </general>
+        </price_lists>
+    </default>
+</config>
