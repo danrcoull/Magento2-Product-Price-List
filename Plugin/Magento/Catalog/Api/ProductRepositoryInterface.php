@@ -56,29 +56,7 @@ class ProductRepositoryInterface
 
         return $result;
     }
-
-    public function afterGetList(
-        ProductRepositoryInterface $subject,
-        ProductSearchResultsInterface $searchCriteria
-    ) : ProductSearchResultsInterface {
-        $products = [];
-        foreach ($searchCriteria->getItems() as $entity) {
-            if ($this->priceListData->getGeneralConfig('enable')) {
-                $extensionAttributes = $this->getExtensionAttributes($entity);
-                $price = $this->priceListData($entity->getId());
-                if ($price > 0) {
-                    $extensionAttributes->setCustomPrice($price);
-                    $extensionAttributes->setOriginalPrice($entity->getPrice());
-                }
-
-                $entity->setExtensionAttributes($extensionAttributes);
-            }
-            $products[] = $entity;
-        }
-        $searchCriteria->setItems($products);
-
-        return $searchCriteria;
-    }
+    
 
     /**
      * Get a ProductExtensionInterface object, creating it if it is not yet created
