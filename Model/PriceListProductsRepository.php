@@ -70,7 +70,7 @@ class PriceListProductsRepository implements PriceListProductsRepositoryInterfac
      */
     protected $priceListProductsCollectionFactory;
     /**
-     * @var PriceListProductsFactory 
+     * @var PriceListProductsFactory
      */
     protected $priceListProductsFactory;
 
@@ -124,15 +124,15 @@ class PriceListProductsRepository implements PriceListProductsRepositoryInterfac
             $storeId = $this->storeManager->getStore()->getId();
             $priceListProducts->setStoreId($storeId);
         } */
-        
+
         $priceListProductsData = $this->extensibleDataObjectConverter->toNestedArray(
             $priceListProducts,
             [],
             \SuttonSilver\PriceLists\Api\Data\PriceListProductsInterface::class
         );
-        
+
         $priceListProductsModel = $this->priceListProductsFactory->create()->setData($priceListProductsData);
-        
+
         try {
             $this->resource->save($priceListProductsModel);
         } catch (\Exception $exception) {
@@ -164,22 +164,22 @@ class PriceListProductsRepository implements PriceListProductsRepositoryInterfac
         \Magento\Framework\Api\SearchCriteriaInterface $criteria
     ) {
         $collection = $this->priceListProductsCollectionFactory->create();
-        
+
         $this->extensionAttributesJoinProcessor->process(
             $collection,
             \SuttonSilver\PriceLists\Api\Data\PriceListProductsInterface::class
         );
-        
+
         $this->collectionProcessor->process($criteria, $collection);
-        
+
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($criteria);
-        
+
         $items = [];
         foreach ($collection as $model) {
             $items[] = $model->getDataModel();
         }
-        
+
         $searchResults->setItems($items);
         $searchResults->setTotalCount($collection->getSize());
         return $searchResults;

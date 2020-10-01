@@ -30,7 +30,6 @@ class PriceListData extends \Magento\Framework\Model\AbstractModel
      */
     protected $priceListProductsCollection;
 
-
     const XML_PATH_PRICELISTS = 'price_lists/';
 
     /**
@@ -66,15 +65,15 @@ class PriceListData extends \Magento\Framework\Model\AbstractModel
     /**
      * @return array|null
      */
-    public function getCustomerProductIds():? array
+    public function getCustomerProductIds(): ?array
     {
         /**
          * @var $productIds array
          */
-        $productIds =[];
+        $productIds = [];
         $listIds = $this->getLists();
         $products = $this->priceListProductsCollection->create()
-            ->addFieldToFilter('price_list_id', ['in'=>$listIds]);
+            ->addFieldToFilter('price_list_id', ['in' => $listIds]);
         /**
          * @var PriceListProductsInterface $product
          */
@@ -97,7 +96,7 @@ class PriceListData extends \Magento\Framework\Model\AbstractModel
     /**
      * @return array|null
      */
-    public function getLists():? array
+    public function getLists(): ?array
     {
         $cid = $this->session->create()->getCustomer()->getId();
         $customerOnLists = $this->priceListCustomersCollection->create()
@@ -110,29 +109,38 @@ class PriceListData extends \Magento\Framework\Model\AbstractModel
 
         return $listIds;
     }
+
     /**
      * @param $productId
+     * @param $originalPrice
      * @return float
      */
-    public function getProductPrice($productId):? float
+    public function getProductPrice($productId, $originalPrice): ?float
     {
         $listIds = $this->getLists();
 
         $prices = $this->priceListProductsCollection->create()
             ->addFieldToFilter('price_list_product_id', $productId)
-            ->addFieldToFilter('price_list_id', ['in'=>$listIds]);
+            ->addFieldToFilter('price_list_id', ['in' => $listIds]);
 
-        $price = 0;
+        $listPrice = 0;
+
         foreach ($prices as $price) {
             $newPrice = $price->getPriceListProductPrice();
+
+            if ($price->getPriceListProductRuleType() === 'discount') {
+                $newPrice = ($newPrice == 100 || $originalPrice == 0) ? 0 :
+                    $originalPrice * (100 - $newPrice) / 100;
+            }
+
             // Only update the price if the new price is less
             // this to form of using the cheapest for final price.
-            if ($newPrice < $price) {
-                $price = $newPrice;
+            if ($newPrice > $listPrice) {
+                $listPrice = $newPrice;
             }
         }
 
-        return $price;
+        return $listPrice;
     }
 
     /**

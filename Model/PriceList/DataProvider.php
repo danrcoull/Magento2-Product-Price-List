@@ -86,22 +86,25 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
                 $this->loadedData[$model->getPricelistId()]['customers'][] = $customer->getPriceListCustomerId();
             }
 
-
-
             $collection = $this->priceListProductsCollection->create()
                 ->addFieldToFilter('price_list_id', $model->getPricelistId());
 
             $p = [];
             foreach ($collection as $products) {
-                $p[$products->getPriceListProductPrice()][] = $products->getPriceListProductId();
+                $p[$products->getPriceListProductPrice()][] = [
+                    'product_id' => $products->getPriceListProductId(),
+                    'rule_type' => $products->getPriceListProductRuleType()
+                ];
             }
 
-
-
             foreach ($p as $key => $productSet) {
+                $productIds = array_column($productSet, 'product_id');
+                $ruleTypes = array_column($productSet, 'rule_type');
+
                 $this->loadedData[$model->getPricelistId()]['products'][] = [
-                    'product_id' => $productSet,
-                    'product_price' => $key
+                    'product_id' => $productIds,
+                    'product_price' => $key,
+                    'rule_type' => $ruleTypes
                 ];
             }
         }

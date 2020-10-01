@@ -14,6 +14,7 @@ interface PriceListProductsInterface extends \Magento\Framework\Api\ExtensibleDa
     const PRICELISTPRODUCTS_ID = 'pricelistproducts_id';
     const PRICE_LIST_PRODUCT_ID = 'price_list_product_id';
     const PRICE_LIST_PRODUCT_PRICE = 'price_list_product_price';
+    const PRICE_LIST_PRODUCT_RULE_TYPE= 'price_list_product_rule_type';
 
     /**
      * Get pricelistproducts_id
@@ -81,4 +82,17 @@ interface PriceListProductsInterface extends \Magento\Framework\Api\ExtensibleDa
      * @return \SuttonSilver\PriceLists\Api\Data\PriceListProductsInterface
      */
     public function setPriceListProductId($priceListProductId);
+
+    /**
+     * Get price_list_product_rule_type
+     * @return string|null
+     */
+    public function getPriceListProductRuleType();
+
+    /**
+     * Set price_list_product_rule_type
+     * @param string $priceListProductId
+     * @return \SuttonSilver\PriceLists\Api\Data\PriceListProductsInterface
+     */
+    public function setPriceListProductRuleType($priceListProductRuleType);
 }

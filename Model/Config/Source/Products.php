@@ -26,8 +26,8 @@ class Products implements \Magento\Framework\Data\OptionSourceInterface
     public function __construct(
         CollectionFactory $productCollection,
         DataObjectFactory $dataObjectFactory,
-                                CacheInterface $cache,
-                                SerializerInterface $serializer
+        CacheInterface $cache,
+        SerializerInterface $serializer
     ) {
         $this->_productCollection = $productCollection;
         $this->dataObjectFactory = $dataObjectFactory;
@@ -43,6 +43,7 @@ class Products implements \Magento\Framework\Data\OptionSourceInterface
     public function toOptionArray()
     {
         $data = $this->cache->load('product_options');
+
         if ($data == null) {
             $options = [];
             $collection = $this->_productCollection->create()->addAttributeToSelect('*');
@@ -61,8 +62,9 @@ class Products implements \Magento\Framework\Data\OptionSourceInterface
 
             $data = $this->serializer->serialize($options);
             $this->cache->save($data, 'product_options', [], 3600);
-            $data =$this->cache->load('product_options');
+            $data = $this->cache->load('product_options');
         }
-        return   $this->serializer->unserialize($data);
+
+        return $this->serializer->unserialize($data);
     }
 }

@@ -112,4 +112,21 @@ class PriceListProducts extends AbstractExtensibleObject implements PriceListPro
     {
         return $this->setData(self::PRICE_LIST_PRODUCT_ID, $priceListProductId);
     }
+
+    /**
+     * @inheridoc
+     */
+    public function getPriceListProductRuleType()
+    {
+        return $this->_get(self::PRICE_LIST_PRODUCT_RULE_TYPE);
+    }
+
+    /**
+     * @inheridoc
+     */
+    public function setPriceListProductRuleType($priceListProductRuleType)
+    {
+        return $this->setData(self::PRICE_LIST_PRODUCT_RULE_TYPE, $priceListProductRuleType);
+    }
+
 }

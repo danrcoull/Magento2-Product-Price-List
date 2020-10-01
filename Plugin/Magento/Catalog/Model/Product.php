@@ -10,7 +10,7 @@ namespace SuttonSilver\PriceLists\Plugin\Magento\Catalog\Model;
 class Product
 {
     /**
-     * @var \SuttonSilver\PriceLists\Model\PriceListData 
+     * @var \SuttonSilver\PriceLists\Model\PriceListData
      */
     protected $priceListData;
 
@@ -33,12 +33,20 @@ class Product
         $result
     ) {
         $price = $result;
-        if ($this->priceListData->getGeneralConfig('enable')) {
-            $newPrice = $this->priceListData->getProductPrice($subject->getId());
-            /** get the lowest price */
-            if ($newPrice < $price || $price == 0) {
-                $price = $newPrice;
-            }
+
+        if (!$this->priceListData->getGeneralConfig('enable')) {
+            return $result;
+        }
+
+        $newPrice = $this->priceListData->getProductPrice($subject->getId(), $price);
+
+        /** get the lowest price */
+        if ($newPrice < $price || $price == 0) {
+            $price = $newPrice;
+        }
+
+        if ($this->priceListData->getGeneralConfig('disable_tier_pricing')) {
+            $subject->setTierPrices([]);
         }
 
         return $price > 0 ? $price : $result;
