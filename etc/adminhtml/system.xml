@@ -21,6 +21,7 @@
                     <label>Enable Price List</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+
                 <field id="categories_logged_in" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Restrict Categories to logged in only</label>
                     <comment>redirect logged out customers to loggin from categories</comment>
@@ -30,6 +31,12 @@
                 <field id="restrict_product_lists" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Restrict product list</label>
                     <comment>redirect product lists to only assigned prices</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="disable_tier_pricing" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Disable tier pricing</label>
+                    <comment>Disables tier pricing for a product when there is a price rule active</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
 

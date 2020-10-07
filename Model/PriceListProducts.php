@@ -65,14 +65,14 @@ class PriceListProducts extends \Magento\Framework\Model\AbstractModel
     public function getDataModel()
     {
         $pricelistproductsData = $this->getData();
-        
+
         $pricelistproductsDataObject = $this->pricelistproductsDataFactory->create();
         $this->dataObjectHelper->populateWithArray(
             $pricelistproductsDataObject,
             $pricelistproductsData,
             PriceListProductsInterface::class
         );
-        
+
         return $pricelistproductsDataObject;
     }
 }

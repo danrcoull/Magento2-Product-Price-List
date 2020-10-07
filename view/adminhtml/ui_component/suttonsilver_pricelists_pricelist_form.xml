@@ -5,190 +5,218 @@
   ~
   -->
 
-<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
-	<argument name="data" xsi:type="array">
-		<item name="js_config" xsi:type="array">
-			<item name="provider" xsi:type="string">suttonsilver_pricelists_pricelist_form.pricelist_form_data_source</item>
-		</item>
-		<item name="label" translate="true" xsi:type="string">General Information</item>
-		<item name="template" xsi:type="string">templates/form/collapsible</item>
-	</argument>
-	<settings>
-		<buttons>
-			<button class="SuttonSilver\PriceLists\Block\Adminhtml\PriceList\Edit\BackButton" name="back"/>
-			<button class="SuttonSilver\PriceLists\Block\Adminhtml\PriceList\Edit\DeleteButton" name="delete"/>
-			<button class="SuttonSilver\PriceLists\Block\Adminhtml\PriceList\Edit\SaveButton" name="save"/>
-			<button class="SuttonSilver\PriceLists\Block\Adminhtml\PriceList\Edit\SaveAndContinueButton" name="save_and_continue"/>
-		</buttons>
-		<namespace>suttonsilver_pricelists_pricelist_form</namespace>
-		<dataScope>data</dataScope>
-		<deps>
-			<dep>suttonsilver_pricelists_pricelist_form.pricelist_form_data_source</dep>
-		</deps>
-	</settings>
-	<dataSource name="pricelist_form_data_source">
-		<argument name="data" xsi:type="array">
-			<item name="js_config" xsi:type="array">
-				<item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
-			</item>
-		</argument>
-		<settings>
-			<submitUrl path="*/*/save"/>
-		</settings>
-		<dataProvider class="SuttonSilver\PriceLists\Model\PriceList\DataProvider" name="pricelist_form_data_source">
-			<settings>
-				<requestFieldName>pricelist_id</requestFieldName>
-				<primaryFieldName>pricelist_id</primaryFieldName>
-			</settings>
-		</dataProvider>
-	</dataSource>
-	<fieldset name="general">
-		<settings>
-			<label>General</label>
-		</settings>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">suttonsilver_pricelists_pricelist_form.pricelist_form_data_source
+            </item>
+        </item>
+        <item name="label" translate="true" xsi:type="string">General Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button class="SuttonSilver\PriceLists\Block\Adminhtml\PriceList\Edit\BackButton" name="back"/>
+            <button class="SuttonSilver\PriceLists\Block\Adminhtml\PriceList\Edit\DeleteButton" name="delete"/>
+            <button class="SuttonSilver\PriceLists\Block\Adminhtml\PriceList\Edit\SaveButton" name="save"/>
+            <button class="SuttonSilver\PriceLists\Block\Adminhtml\PriceList\Edit\SaveAndContinueButton"
+                    name="save_and_continue"/>
+        </buttons>
+        <namespace>suttonsilver_pricelists_pricelist_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>suttonsilver_pricelists_pricelist_form.pricelist_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="pricelist_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="*/*/save"/>
+        </settings>
+        <dataProvider class="SuttonSilver\PriceLists\Model\PriceList\DataProvider" name="pricelist_form_data_source">
+            <settings>
+                <requestFieldName>pricelist_id</requestFieldName>
+                <primaryFieldName>pricelist_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label>General</label>
+        </settings>
 
-		<field formElement="input" name="name" sortOrder="10">
-			<argument name="data" xsi:type="array">
-				<item name="config" xsi:type="array">
-					<item name="source" xsi:type="string">PriceList</item>
-				</item>
-			</argument>
-			<settings>
-				<dataType>text</dataType>
-				<label translate="true">Price List Name</label>
-				<dataScope>name</dataScope>
-				<validation>
-					<rule name="required-entry" xsi:type="boolean">false</rule>
-				</validation>
-			</settings>
-		</field>
-		<field formElement="textarea" name="description" sortOrder="20">
-			<argument name="data" xsi:type="array">
-				<item name="config" xsi:type="array">
-					<item name="source" xsi:type="string">PriceList</item>
-				</item>
-			</argument>
-			<settings>
-				<dataType>text</dataType>
-				<label translate="true">Price List Description</label>
-				<dataScope>description</dataScope>
-				<validation>
-					<rule name="required-entry" xsi:type="boolean">false</rule>
-				</validation>
-			</settings>
-		</field>
+        <field formElement="input" name="name" sortOrder="10">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">PriceList</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Price List Name</label>
+                <dataScope>name</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+            </settings>
+        </field>
+        <field formElement="textarea" name="description" sortOrder="20">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">PriceList</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Price List Description</label>
+                <dataScope>description</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+            </settings>
+        </field>
 
-		<field name="customers">
-			<argument name="data" xsi:type="array">
-				<item name="options" xsi:type="object">SuttonSilver\PriceLists\Model\Config\Source\Customers</item>
-				<item name="config" xsi:type="array">
-					<item name="label" xsi:type="string">Customers</item>
-					<item name="formElement" xsi:type="string">select</item>
-					<item name="component" xsi:type="string">SuttonSilver_PriceLists/js/ui-custom-select</item>
-					<item name="disableLabel" xsi:type="boolean">false</item>
-					<item name="filterOptions" xsi:type="boolean">true</item>
-					<item name="chipsEnabled" xsi:type="boolean">true</item>
-					<item name="searchOptions" xsi:type="boolean">true</item>
-					<item name="levelsVisibility" xsi:type="string">1</item>
-					<item name="multiple" xsi:type="boolean">true</item>
-					<item name="closeBtn" xsi:type="boolean">true</item>
-					<item name="template" xsi:type="string">SuttonSilver_PriceLists/ui-select</item>
-					<item name="searchUrl" xsi:type="string">catalog/product/search</item>
-					<item name="filterPlaceholder" xsi:type="string">Customer Name</item>
-					<item name="isDisplayEmptyPlaceholder" xsi:type="boolean">true</item>
-					<item name="isRemoveSelectedIcon" xsi:type="boolean">true</item>
-					<item name="emptyOptionsHtml" xsi:type="string">Start typing to find customers</item>
-				</item>
-			</argument>
+        <field name="customers">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">SuttonSilver\PriceLists\Model\Config\Source\Customers</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Customers</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">SuttonSilver_PriceLists/js/ui-custom-select</item>
+                    <item name="disableLabel" xsi:type="boolean">false</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="chipsEnabled" xsi:type="boolean">true</item>
+                    <item name="searchOptions" xsi:type="boolean">true</item>
+                    <item name="levelsVisibility" xsi:type="string">1</item>
+                    <item name="multiple" xsi:type="boolean">true</item>
+                    <item name="closeBtn" xsi:type="boolean">true</item>
+                    <item name="template" xsi:type="string">SuttonSilver_PriceLists/ui-select</item>
+                    <item name="searchUrl" xsi:type="string">catalog/product/search</item>
+                    <item name="filterPlaceholder" xsi:type="string">Customer Name</item>
+                    <item name="isDisplayEmptyPlaceholder" xsi:type="boolean">true</item>
+                    <item name="isRemoveSelectedIcon" xsi:type="boolean">true</item>
+                    <item name="emptyOptionsHtml" xsi:type="string">Start typing to find customers</item>
+                </item>
+            </argument>
 
-		</field>
+        </field>
 
-		<dynamicRows name="products">
-			<argument name="data" xsi:type="array">
-				<item name="config" xsi:type="array">
-					<item name="label" xsi:type="string" translate="true">Products</item>
-					<item name="showLabel" xsi:type="boolean">true</item>
-				</item>
-			</argument>
-			<settings>
-				<addButtonLabel translate="true">Add Record</addButtonLabel>
-				<additionalClasses>
-					<class name="admin__field">true</class>
-				</additionalClasses>
-				<componentType>dynamicRows</componentType>
-			</settings>
-			<container name="record" component="Magento_Ui/js/dynamic-rows/record">
-				<argument name="data" xsi:type="array">
-					<item name="config" xsi:type="array">
-						<item name="label" xsi:type="string" translate="true">Products</item>
-						<item name="showLabel" xsi:type="boolean">true</item>
-						<item name="isTemplate" xsi:type="boolean">true</item>
-						<item name="is_collection" xsi:type="boolean">true</item>
-						<item name="componentType" xsi:type="string">container</item>
-					</item>
-				</argument>
-				<field name="product_id">
-					<argument name="data" xsi:type="array">
-						<item name="options" xsi:type="object">SuttonSilver\PriceLists\Model\Config\Source\Products</item>
-						<item name="config" xsi:type="array">
-							<item name="label" xsi:type="string">Products</item>
-							<item name="formElement" xsi:type="string">select</item>
-							<item name="component" xsi:type="string">SuttonSilver_PriceLists/js/ui-custom-select</item>
-							<item name="disableLabel" xsi:type="boolean">true</item>
-							<item name="filterOptions" xsi:type="boolean">true</item>
-							<item name="chipsEnabled" xsi:type="boolean">true</item>
-							<item name="searchOptions" xsi:type="boolean">true</item>
-							<item name="levelsVisibility" xsi:type="string">1</item>
-							<item name="multiple" xsi:type="boolean">true</item>
-							<item name="closeBtn" xsi:type="boolean">true</item>
-							<item name="template" xsi:type="string">ui/grid/filters/elements/ui-select</item>
-							<item name="searchUrl" xsi:type="string">catalog/product/search</item>
-							<item name="validationUrl" xsi:type="string">catalog/product/search</item>
-							<item name="filterPlaceholder" xsi:type="string">Customer Name</item>
-							<item name="isDisplayEmptyPlaceholder" xsi:type="boolean">true</item>
-							<item name="isRemoveSelectedIcon" xsi:type="boolean">true</item>
-							<item name="emptyOptionsHtml" xsi:type="string">Start typing to find products</item>
-							<item name="fit" xsi:type="boolean">true</item>
-						</item>
-					</argument>
-					<settings>
-						<componentType>field</componentType>
-						<additionalClasses>
-							<class name="admin__field">true</class>
-						</additionalClasses>
-					</settings>
-				</field>
+        <dynamicRows name="products">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Products</item>
+                    <item name="showLabel" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+            <settings>
+                <addButtonLabel translate="true">Add Record</addButtonLabel>
+                <additionalClasses>
+                    <class name="admin__field">true</class>
+                </additionalClasses>
+                <componentType>dynamicRows</componentType>
+            </settings>
+            <container name="record" component="Magento_Ui/js/dynamic-rows/record">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Products</item>
+                        <item name="showLabel" xsi:type="boolean">true</item>
+                        <item name="isTemplate" xsi:type="boolean">true</item>
+                        <item name="is_collection" xsi:type="boolean">true</item>
+                        <item name="componentType" xsi:type="string">container</item>
+                    </item>
+                </argument>
+                <field name="product_id">
+                    <argument name="data" xsi:type="array">
+                        <item name="options" xsi:type="object">SuttonSilver\PriceLists\Model\Config\Source\Products
+                        </item>
+                        <item name="config" xsi:type="array">
+                            <item name="label" xsi:type="string">Products</item>
+                            <item name="formElement" xsi:type="string">select</item>
+                            <item name="component" xsi:type="string">SuttonSilver_PriceLists/js/ui-custom-select</item>
+                            <item name="disableLabel" xsi:type="boolean">true</item>
+                            <item name="filterOptions" xsi:type="boolean">true</item>
+                            <item name="chipsEnabled" xsi:type="boolean">true</item>
+                            <item name="searchOptions" xsi:type="boolean">true</item>
+                            <item name="levelsVisibility" xsi:type="string">1</item>
+                            <item name="multiple" xsi:type="boolean">true</item>
+                            <item name="closeBtn" xsi:type="boolean">true</item>
+                            <item name="template" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                            <item name="searchUrl" xsi:type="string">catalog/product/search</item>
+                            <item name="validationUrl" xsi:type="string">catalog/product/search</item>
+                            <item name="filterPlaceholder" xsi:type="string">Customer Name</item>
+                            <item name="isDisplayEmptyPlaceholder" xsi:type="boolean">true</item>
+                            <item name="isRemoveSelectedIcon" xsi:type="boolean">true</item>
+                            <item name="emptyOptionsHtml" xsi:type="string">Start typing to find products</item>
+                            <item name="fit" xsi:type="boolean">true</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <componentType>field</componentType>
+                        <additionalClasses>
+                            <class name="admin__field">true</class>
+                        </additionalClasses>
+                    </settings>
+                </field>
 
-				<field name="product_price" formElement="input">
-					<argument name="data" xsi:type="array">
-						<item name="config" xsi:type="array">
-							<item name="fit" xsi:type="boolean">true</item>
-						</item>
-					</argument>
-					<settings>
-						<validation>
-							<rule name="required-entry" xsi:type="boolean">true</rule>
-						</validation>
-						<dataType>text</dataType>
-						<label>Product Price</label>
-					</settings>
-				</field>
-				<actionDelete template="Magento_Backend/dynamic-rows/cells/action-delete">
-					<argument name="data" xsi:type="array">
-						<item name="config" xsi:type="array">
-							<item name="fit" xsi:type="boolean">false</item>
-						</item>
-					</argument>
-					<settings>
-						<additionalClasses>
-							<class name="some-class">true</class>
-						</additionalClasses>
-						<dataType>text</dataType>
-						<label>Actions</label>
-						<componentType>actionDelete</componentType>
-					</settings>
-				</actionDelete>
-			</container>
-		</dynamicRows>
-	</fieldset>
+                <field name="rule_type" formElement="select">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="dataType" xsi:type="string">select</item>
+                            <item name="component" xsi:type="string">Magento_Ui/js/form/element/select</item>
+                            <item name="fit" xsi:type="boolean">true</item>
+                        </item>
+                        <item name="options" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="value" xsi:type="string">price</item>
+                                <item name="label" xsi:type="string" translate="true">Fixed price</item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">discount</item>
+                                <item name="label" xsi:type="string" translate="true">Discount %</item>
+                            </item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <validation>
+                            <rule name="required-entry" xsi:type="boolean">false</rule>
+                        </validation>
+                        <label>Type</label>
+                    </settings>
+                </field>
+
+                <field name="product_price" formElement="input">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="fit" xsi:type="boolean">true</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <validation>
+                            <rule name="required-entry" xsi:type="boolean">false</rule>
+                        </validation>
+                        <dataType>number</dataType>
+                        <label>Product Price / Discount %</label>
+                    </settings>
+                </field>
+
+                <actionDelete template="Magento_Backend/dynamic-rows/cells/action-delete">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="fit" xsi:type="boolean">false</item>
+                        </item>
+                    </argument>
+                    <settings>
+                        <dataType>text</dataType>
+                        <label>Actions</label>
+                        <componentType>actionDelete</componentType>
+                    </settings>
+                </actionDelete>
+            </container>
+        </dynamicRows>
+    </fieldset>
 </form>

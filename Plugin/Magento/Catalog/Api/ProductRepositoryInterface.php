@@ -45,7 +45,7 @@ class ProductRepositoryInterface
         $result
     ) {
         if ($this->priceListData->getGeneralConfig('enable')) {
-            $price = $this->priceListData->getProductPrice($result->getId());
+            $price = $this->priceListData->getProductPrice($result->getId(), $result->getPrice());
 
             $extension = $this->getExtensionAttributes($result);
             $extension->setCustomPrice($price);
@@ -56,7 +56,7 @@ class ProductRepositoryInterface
 
         return $result;
     }
-    
+
 
     /**
      * Get a ProductExtensionInterface object, creating it if it is not yet created

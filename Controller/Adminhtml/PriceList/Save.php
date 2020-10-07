@@ -133,6 +133,12 @@ class Save extends Action
         return $resultRedirect->setPath('*/*/');
     }
 
+    /***
+     * Update the products table for the newly created price list
+     *
+     * @param $products
+     * @param $id
+     */
     public function updateProducts($products, $id)
     {
         /** new product ids */
@@ -142,11 +148,17 @@ class Save extends Action
             if (is_array($product['product_id'])) {
                 foreach ($product['product_id'] as $ipd) {
                     $selectedIds[] = (int)$ipd;
-                    $priceMap[$ipd] = $product['product_price'];
+                    $priceMap[$ipd] = [
+                        'value'=> $product['product_price'],
+                        'type' => $product['rule_type']
+                    ];
                 }
             } else {
                 $selectedIds[] = $product['product_id'];
-                $priceMap[ $product['product_id']] = $product['product_price'];
+                $priceMap[ $product['product_id']] = [
+                    'value'=> $product['product_price'],
+                    'type' => $product['rule_type']
+                ];
             }
         }
 
@@ -186,7 +198,8 @@ class Save extends Action
             $item->setPriceListProductId($sid);
             $item->setPriceListId($id);
             if (isset($priceMap[$sid])) {
-                $item->setPriceListProductPrice($priceMap[$sid]);
+                $item->setPriceListProductPrice($priceMap[$sid]['value']);
+                $item->setPriceListProductRuleType($priceMap[$sid]['type']);
             }
             try {
                 $this->priceListProductsRepository->save($item);
@@ -195,6 +208,12 @@ class Save extends Action
         }
     }
 
+    /**
+     * Update the customers table for the newly created price list
+     *
+     * @param $customers
+     * @param $id
+     */
     public function updateCustomers($customers, $id)
     {
         /** new product ids */

@@ -7,6 +7,8 @@
 
 namespace SuttonSilver\PriceLists\Controller\Adminhtml\PriceList;
 
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\Registry;
 use SuttonSilver\PriceLists\Controller\Adminhtml\PriceList;
 
 /**
@@ -15,6 +17,28 @@ use SuttonSilver\PriceLists\Controller\Adminhtml\PriceList;
  */
 class Delete extends PriceList
 {
+    /** @var \SuttonSilver\PriceLists\Model\ResourceModel\PriceListCustomers\Collection */
+    protected $customerCollection;
+
+    /** @var \SuttonSilver\PriceLists\Model\ResourceModel\PriceListProducts\Collection */
+    protected $productsCollection;
+
+    /**
+     * Delete constructor.
+     * @param \SuttonSilver\PriceLists\Model\ResourceModel\PriceListCustomers\Collection $customerCollection
+     * @param \SuttonSilver\PriceLists\Model\ResourceModel\PriceListProducts\Collection $productsCollection
+     */
+    public function __construct(
+        \SuttonSilver\PriceLists\Model\ResourceModel\PriceListCustomers\Collection $customerCollection,
+        \SuttonSilver\PriceLists\Model\ResourceModel\PriceListProducts\Collection $productsCollection,
+        Context $context,
+        Registry $coreRegistry
+    ) {
+        $this->customerCollection = $customerCollection;
+        $this->productsCollection = $productsCollection;
+
+        parent::__construct($context, $coreRegistry);
+    }
 
     /**
      * Delete action
@@ -32,6 +56,11 @@ class Delete extends PriceList
                 // init model and delete
                 $model = $this->_objectManager->create(\SuttonSilver\PriceLists\Model\PriceList::class);
                 $model->load($id);
+
+                // Delete customer and product rows
+                $this->customerCollection->addFieldToFilter('price_list_id', $id)->walk('delete');
+                $this->productsCollection->addFieldToFilter('price_list_id', $id)->walk('delete');
+
                 $model->delete();
                 // display success message
                 $this->messageManager->addSuccessMessage(__('You deleted the Pricelist.'));
