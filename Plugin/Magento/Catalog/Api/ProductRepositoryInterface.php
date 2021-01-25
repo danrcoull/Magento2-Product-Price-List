@@ -44,19 +44,24 @@ class ProductRepositoryInterface
         \Magento\Catalog\Api\ProductRepositoryInterface $subject,
         $result
     ) {
-        if ($this->priceListData->getGeneralConfig('enable')) {
-            $price = $this->priceListData->getProductPrice($result->getId(), $result->getPrice());
-
-            $extension = $this->getExtensionAttributes($result);
-            $extension->setCustomPrice($price);
-            $extension->setOriginalPrice($result->getPrice());
-
-            $result->setExtensionAttributes($extension);
+        if (!$this->priceListData->getGeneralConfig('enable')) {
+            return $result;
         }
+
+        $price = $this->priceListData->getProductPrice($result->getId(), $result->getPrice(), $appliedPriceList);
+
+        if (!$appliedPriceList) {
+            return $result;
+        }
+
+        $extension = $this->getExtensionAttributes($result);
+        $extension->setCustomPrice($price);
+        $extension->setOriginalPrice($result->getPrice());
+
+        $result->setExtensionAttributes($extension);
 
         return $result;
     }
-
 
     /**
      * Get a ProductExtensionInterface object, creating it if it is not yet created
@@ -64,8 +69,10 @@ class ProductRepositoryInterface
      * @param ProductInterface $customer
      * @return ProductExtensionInterface|null
      */
-    private function getExtensionAttributes(ProductInterface $customer)
-    {
+    private
+    function getExtensionAttributes(
+        ProductInterface $customer
+    ) {
         $extensionAttributes = $customer->getExtensionAttributes();
         if (!$extensionAttributes) {
             $extensionAttributes = $this->extensionFactory->create();
