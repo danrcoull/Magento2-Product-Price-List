@@ -38,14 +38,14 @@ class Product
             return $result;
         }
 
-        $newPrice = $this->priceListData->getProductPrice($subject->getId(), $price);
+        $newPrice = $this->priceListData->getProductPrice($subject->getId(), $price, $appliedPriceList);
 
         /** get the lowest price */
         if ($newPrice < $price || $price == 0) {
             $price = $newPrice;
         }
 
-        if ($this->priceListData->getGeneralConfig('disable_tier_pricing')) {
+        if ($appliedPriceList && $this->priceListData->getGeneralConfig('disable_tier_pricing')) {
             $subject->setTierPrices([]);
         }
 

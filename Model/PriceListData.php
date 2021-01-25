@@ -113,9 +113,10 @@ class PriceListData extends \Magento\Framework\Model\AbstractModel
     /**
      * @param $productId
      * @param $originalPrice
+     * @param bool $appliedPriceList
      * @return float
      */
-    public function getProductPrice($productId, $originalPrice): ?float
+    public function getProductPrice($productId, $originalPrice, &$appliedPriceList): ?float
     {
         $listIds = $this->getLists();
 
@@ -137,6 +138,7 @@ class PriceListData extends \Magento\Framework\Model\AbstractModel
             // this to form of using the cheapest for final price.
             if ($newPrice > $listPrice) {
                 $listPrice = $newPrice;
+                $appliedPriceList = true;
             }
         }
 
